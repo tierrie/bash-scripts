@@ -122,6 +122,9 @@ else
 	# removes the need to use fully qualified login names e.g. username@domain.local and allow logins with just username
 	sed -i -e 's/use_fully_qualified_names = True/use_fully_qualified_names = False/g' /etc/sssd/sssd.conf
 
+	# removes the home directory from /home/username@domain.local and just places it in /home
+	sed -i -e s'/fallback_homedir = \/home\/%u@%d/fallback_homedir = \/home\/%u/g' /etc/sssd/sssd.conf
+
 	# allow users in the Domain Admins group without logging in with UPN e.g. username
 	cat > /etc/sudoers.d/domain_admin <<- EOF
 		%Domain\ Admins ALL=(ALL) ALL
