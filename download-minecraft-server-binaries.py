@@ -8,7 +8,7 @@ server_binary_directory = "/opt/minecraft/server_binaries"
 # -w or --world <name> : update this instance's minecraft_server.jar
 # -v or --version <version name> : if specified ,download this specific version of the binary instead of the latest
 try:
-  opts, args = getopt.getopt(sys.argv[1:],"hw:v:",["world=","version="])
+  opts, args = getopt.getopt(sys.argv[1:],"hw:v:",["world=","version=","eula="])
 except getopt.GetoptError as err:
   print(err)
   print("%s -w <world> -v <server version>" % sys.argv[0])
@@ -26,6 +26,9 @@ for opt, arg in opts:
   elif opt in ("-v", "--version"):
     version = arg
     print("Downloading the minecraft server version %s" % version)
+  elif opt in ("--eula"):
+    eula = arg
+    print("Setting EULA to %s" % eula)
 
 
 # download and search for the latest version of the minecraft server
@@ -87,4 +90,13 @@ if (world):
   # create symbolic link
   print("Creating symbolic link from %s to %s" % (server_download_path, instance_binary_path))
   os.symlink(server_download_path, instance_binary_path)
+  
+  # if eula is not accepted, accept eula
+  eula_path = instance_path + "/eula.txt"
+  if (eula):
+    print("Updating EULA")
+    f=open(eula_path, "w+")
+    f.write(eula)
+    f.close()
+    
 
