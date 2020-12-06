@@ -96,7 +96,7 @@ if (world):
   if (eula):
     print("Updating EULA")
     f=open(eula_path, "w+")
-    f.write(eula)
+    f.write("eula=" + eula)
     f.close()
     
 
