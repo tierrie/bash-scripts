@@ -16,6 +16,7 @@ except getopt.GetoptError as err:
 
 world = None
 version = None
+eula = None
 for opt, arg in opts:
   if opt == '-h':
     print("%s -w <world> -v <server version>" % sys.argv[0])
