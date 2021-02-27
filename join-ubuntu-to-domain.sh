@@ -52,7 +52,7 @@ fi
 
 # use fully qualified user name
 while [[ -z $USE_UPN || ! ($USE_UPN == "y" || $USE_UPN == "n") ]]; do
-	read -p "Would you like to use User Principal Name with the Domain Name as the suffix (e.g. username@domain.local) (y/n)? " USE_UPN
+	read -p "Would you like to use User Principal Name with the Domain Name as the suffix during login (e.g. username@domain.local) (y/n)? " USE_UPN
 done
 
 
