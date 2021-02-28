@@ -20,7 +20,7 @@ unset CONFIRM
 TIMEZONE="America/Los Angeles"
 while [[ -z $TIMEZONE || -z $CONFIRM || $CONFIRM != "y" ]]; do
 	read -p "Specify the timezone (default: ${TIMEZONE}): " TIMEZONE
-	TIMEZONE="${TIMEZONE:-America/Los Angeles}"
+	TIMEZONE="${TIMEZONE:-America/Los_Angeles}"
 	read -p "Timezone set to ${TIMEZONE}. Is this correct (y/n)? " CONFIRM
 done
 
@@ -31,6 +31,9 @@ sed -i -e s"|^#\?NTP.\+|NTP=${NTPSERVER}|g" /etc/systemd/timesyncd.conf
 
 # enable ntp
 timedatectl set-ntp true
+
+# set timezone
+timedatectl timezone $TIMEZONE
 
 # restart the ntp sync service
 systemctl restart systemd-timesyncd.service
