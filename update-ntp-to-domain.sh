@@ -33,7 +33,7 @@ sed -i -e s"|^#\?NTP.\+|NTP=${NTPSERVER}|g" /etc/systemd/timesyncd.conf
 timedatectl set-ntp true
 
 # set timezone
-timedatectl timezone $TIMEZONE
+timedatectl set-timezone  $TIMEZONE
 
 # restart the ntp sync service
 systemctl restart systemd-timesyncd.service
